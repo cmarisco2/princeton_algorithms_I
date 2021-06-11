@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="checkstyle-lift">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/classic_sorts/.lift" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/classic_sorts/.lift" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/classic_sorts/.lift" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/classic_sorts/.lift" recursive="false" type="SOURCES" />
+  </library>
+</component>

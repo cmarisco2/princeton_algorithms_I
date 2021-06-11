@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="checkstyle-lift">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/red_black_binary_search_tree/.lift" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/red_black_binary_search_tree/.lift" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/red_black_binary_search_tree/.lift" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/red_black_binary_search_tree/.lift" recursive="false" type="SOURCES" />
+  </library>
+</component>
