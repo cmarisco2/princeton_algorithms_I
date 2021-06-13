@@ -126,10 +126,14 @@ public class Merge {
 //        merge(a, aux, lo, mid, hi);
 //        for (String s : a)
 //            StdOut.println("The new Merged sub-arrays are: " + s);
+        StdOut.println();
         String[] a = {"M", "E", "R", "G", "E", "S", "O", "R", "T"};
-        StdOut.println("The Following Unsorted String is: ");
+        StdOut.println("The Unsorted String is: ");
         printArray(a);
+        StdOut.println();
+        StdOut.println("The Sorted String is: ");
         Merge.sort(a);
         printArray(a);
+        StdOut.println();
     }
 }
