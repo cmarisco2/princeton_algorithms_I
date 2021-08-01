@@ -17,7 +17,8 @@ public class BruteCollinearPoints {
     private LineSegment[] mySegments;
 
     public BruteCollinearPoints(Point[] points) {
-
+        mySegments = new LineSegment[1];
+        lineFinder(points);
     }
 
     public int numberOfSegments() {
@@ -26,6 +27,33 @@ public class BruteCollinearPoints {
 
     public LineSegment[] segments() {
         return mySegments;
+    }
+
+    private void lineFinder(Point[] points) {
+        Point[] potentialLine = new Point[4];
+        Point max, min;
+        double testSlope;
+        for (int i = 0; i < points.length; i++) {
+            potentialLine[0] = points[i];
+            for (int j = i + 1; j < points.length; j++) {
+                testSlope = points[i].slopeTo(points[j]);
+                potentialLine[1] = points[j];
+                for (int k = j + 1; k < points.length; k++) {
+                    if (points[i].slopeTo(points[k]) == testSlope) {
+                        potentialLine[2] = points[k];
+                        for (int l = k + 1; l < points.length; l++) {
+                            if (points[i].slopeTo(points[l]) == testSlope) {
+                                potentialLine[3] = points[l];
+                                //quick select 0 & 3
+                                max = (Point) Quick.select(potentialLine, 3);
+                                min = (Point) Quick.select(potentialLine, 0);
+                                mySegments[0] = new LineSegment(min, max);
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public static void main(String[] args) {
