@@ -9,6 +9,7 @@
  ******************************************************************************/
 
 import edu.princeton.cs.algs4.StdDraw;
+import edu.princeton.cs.algs4.StdOut;
 
 import java.util.Comparator;
 
@@ -124,6 +125,12 @@ public class Point implements Comparable<Point> {
         Point p = new Point(1, 1);
         Point q = new Point(2, 2);
         Point r = new Point(1, 5);
+
+        Point[] points = {p, q, r};
+
+        StdOut.println("The Following Points are: ");
+        for (int i = 0; i < 3; i++)
+            StdOut.println(points[i]);
 
     }
 }
