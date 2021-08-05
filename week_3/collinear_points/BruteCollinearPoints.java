@@ -14,10 +14,15 @@ import edu.princeton.cs.algs4.StdOut;
  *************************************************************************/
 public class BruteCollinearPoints {
 
-    private LineSegment[] mySegments;
+    private final LineSegment[] mySegments;
 
     public BruteCollinearPoints(Point[] points) {
-        mySegments = new LineSegment[1];
+        if (points == null)
+            throw new IllegalArgumentException("Null Array is an invalid argument");
+        mySegments = new LineSegment[points.length];
+        for (int i = 0; i < points.length - 1; i++)
+            if (points[i].compareTo(points[i + 1]) == 0)
+                throw new IllegalArgumentException("Cannot Use Repeated Points");
         lineFinder(points);
     }
 
@@ -30,31 +35,41 @@ public class BruteCollinearPoints {
     }
 
     private void lineFinder(Point[] points) {
-        Point[] potentialLine = new Point[4];
-        Point max, min;
-        double testSlope;
-        for (int i = 0; i < points.length; i++) {
-            potentialLine[0] = points[i];
-            for (int j = i + 1; j < points.length; j++) {
-                testSlope = points[i].slopeTo(points[j]);
-                potentialLine[1] = points[j];
-                for (int k = j + 1; k < points.length; k++) {
-                    if (points[i].slopeTo(points[k]) == testSlope) {
-                        potentialLine[2] = points[k];
-                        for (int l = k + 1; l < points.length; l++) {
-                            if (points[i].slopeTo(points[l]) == testSlope) {
-                                potentialLine[3] = points[l];
-                                //quick select 0 & 3
-                                max = (Point) Quick.select(potentialLine, 3);
-                                min = (Point) Quick.select(potentialLine, 0);
-                                mySegments[0] = new LineSegment(min, max);
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        
     }
+
+//    private void lineFinder(Point[] points) {
+//        Point[] potentialLine = new Point[4];
+//        int segmentCounter = 0;
+//        Point max, min;
+//        double testSlope;
+//        for (int i = 0; i < points.length; i++) {
+//            if (points[i] == null)
+//                throw new IllegalArgumentException("Null Point Exception");
+//            potentialLine[0] = points[i];
+//            for (int j = i + 1; j < points.length; j++) {
+//                testSlope = points[i].slopeTo(points[j]);
+//                potentialLine[1] = points[j];
+//                for (int k = j + 1; k < points.length; k++) {
+//                    if (points[i].slopeTo(points[k]) == testSlope) {
+//                        potentialLine[2] = points[k];
+//                        for (int l = k + 1; l < points.length; l++) {
+//                            if (points[i].slopeTo(points[l]) == testSlope) {
+//                                potentialLine[3] = points[l];
+//                                //quick select 0 & 3
+//                                max = (Point) Quick.select(potentialLine, 3);
+//                                min = (Point) Quick.select(potentialLine, 0);
+//                                mySegments[segmentCounter] = new LineSegment(min, max);
+////                                testSlope = -1000;
+//                            }
+//                        }
+//                    }
+//                }
+//                segmentCounter++;
+//            }
+//        }
+//    }
+
 
     public static void main(String[] args) {
         // read the n points from a file
@@ -79,8 +94,10 @@ public class BruteCollinearPoints {
         // print and draw the line segments
         BruteCollinearPoints collinear = new BruteCollinearPoints(points);
         for (LineSegment segment : collinear.segments()) {
-            StdOut.println(segment);
-            segment.draw();
+            if (segment != null) {
+                StdOut.println(segment);
+                segment.draw();
+            }
         }
         StdDraw.show();
     }
