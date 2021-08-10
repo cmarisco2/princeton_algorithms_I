@@ -49,7 +49,7 @@ public class BruteCollinearPoints {
     }
 
     private void findSegment(Point[] points) {
-        Point max, min;
+//        Point max, min;
         double testSlope, innerSlope, epsilon = .0001;
         Stack<Double> slopes = new Stack<>();
         Stack<Point> stack = new Stack<>();
@@ -72,16 +72,6 @@ public class BruteCollinearPoints {
                     while (!stack.empty())
                         StdOut.print(stack.pop() + " ");
                     StdOut.print("Slope is: " + testSlope);
-//                    max = stack.pop();
-//                    min = max;
-//                    while (!stack.empty()) {
-//                        Point temp = stack.pop();
-//                        if (max.compareTo(temp) < 0)
-//                            max = temp;
-//                        if (min.compareTo(temp) > 0)
-//                            min = temp;
-//                    }
-//                    addSegment(new LineSegment(min, max));
                     StdOut.println();
                     break;
                 } else {
