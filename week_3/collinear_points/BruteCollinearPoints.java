@@ -68,10 +68,6 @@ public class BruteCollinearPoints {
                         stack.push(points[k]);
                 }
                 if (stack.size() >= 4) {
-//                    StdOut.print("Elements are : ");
-//                    while (!stack.empty())
-//                        StdOut.print(stack.pop() + " ");
-//                    StdOut.print("Slope is: " + testSlope);
                     max = stack.pop();
                     min = max;
                     while (!stack.empty()) {
@@ -82,9 +78,6 @@ public class BruteCollinearPoints {
                             min = temp;
                     }
                     addSegment(new LineSegment(min, max));
-//                    mySegments[0] = new LineSegment(min, max);
-//                    StdOut.println();
-//                    break;
                 } else {
                     while (!stack.empty())
                         stack.pop();
