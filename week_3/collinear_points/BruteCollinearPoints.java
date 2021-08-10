@@ -2,6 +2,8 @@ import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.StdOut;
 
+import java.util.Stack;
+
 /*************************************************************************
  *  Compilation:  javac BruteCollinearPoints.java
  *  Execution:    java BruteCollinearPoints
@@ -14,16 +16,17 @@ import edu.princeton.cs.algs4.StdOut;
  *************************************************************************/
 public class BruteCollinearPoints {
 
-    private final LineSegment[] mySegments;
+    private LineSegment[] mySegments;
+    private int segmentIndex = 0;
 
     public BruteCollinearPoints(Point[] points) {
         if (points == null)
             throw new IllegalArgumentException("Null Array is an invalid argument");
-        mySegments = new LineSegment[points.length];
+        mySegments = new LineSegment[1];
         for (int i = 0; i < points.length - 1; i++)
             if (points[i].compareTo(points[i + 1]) == 0)
                 throw new IllegalArgumentException("Cannot Use Repeated Points");
-        lineFinder(points);
+        findSegment(points);
     }
 
     public int numberOfSegments() {
@@ -34,41 +37,65 @@ public class BruteCollinearPoints {
         return mySegments;
     }
 
-    private void lineFinder(Point[] points) {
-        
+    private void addSegment(LineSegment line) {
+        if (segmentIndex == mySegments.length) resize(mySegments.length * 2);
+        mySegments[segmentIndex++] = line;
     }
 
-//    private void lineFinder(Point[] points) {
-//        Point[] potentialLine = new Point[4];
-//        int segmentCounter = 0;
-//        Point max, min;
-//        double testSlope;
-//        for (int i = 0; i < points.length; i++) {
-//            if (points[i] == null)
-//                throw new IllegalArgumentException("Null Point Exception");
-//            potentialLine[0] = points[i];
-//            for (int j = i + 1; j < points.length; j++) {
-//                testSlope = points[i].slopeTo(points[j]);
-//                potentialLine[1] = points[j];
-//                for (int k = j + 1; k < points.length; k++) {
-//                    if (points[i].slopeTo(points[k]) == testSlope) {
-//                        potentialLine[2] = points[k];
-//                        for (int l = k + 1; l < points.length; l++) {
-//                            if (points[i].slopeTo(points[l]) == testSlope) {
-//                                potentialLine[3] = points[l];
-//                                //quick select 0 & 3
-//                                max = (Point) Quick.select(potentialLine, 3);
-//                                min = (Point) Quick.select(potentialLine, 0);
-//                                mySegments[segmentCounter] = new LineSegment(min, max);
-////                                testSlope = -1000;
-//                            }
-//                        }
-//                    }
-//                }
-//                segmentCounter++;
-//            }
-//        }
-//    }
+    private void resize(int capacity) {
+        LineSegment[] copy = new LineSegment[capacity];
+        System.arraycopy(mySegments, 0, copy, 0, mySegments.length);
+        mySegments = copy;
+    }
+
+    private void findSegment(Point[] points) {
+        Point max, min;
+        double testSlope, innerSlope, epsilon = .0001;
+        Stack<Double> slopes = new Stack<>();
+        Stack<Point> stack = new Stack<>();
+        for (int i = 0; i < points.length; i++) {
+            stack.push(points[i]);
+            for (int j = i + 1; j < points.length; j++) {
+                if (j == i) continue;
+                testSlope = points[i].slopeTo(points[j]);
+                if (slopes.contains(testSlope)) break;
+                slopes.push(testSlope);
+                stack.push(points[j]);
+                for (int k = j + 1; k < points.length; k++) {
+                    if (k == i || k == j) continue;
+                    innerSlope = points[i].slopeTo(points[k]);
+                    if (Math.abs(testSlope - innerSlope) < epsilon)
+                        stack.push(points[k]);
+                }
+                if (stack.size() >= 4) {
+//                    StdOut.print("Elements are : ");
+//                    while (!stack.empty())
+//                        StdOut.print(stack.pop() + " ");
+//                    StdOut.print("Slope is: " + testSlope);
+                    max = stack.pop();
+                    min = max;
+                    while (!stack.empty()) {
+                        Point temp = stack.pop();
+                        if (max.compareTo(temp) < 0)
+                            max = temp;
+                        if (min.compareTo(temp) > 0)
+                            min = temp;
+                    }
+                    addSegment(new LineSegment(min, max));
+//                    mySegments[0] = new LineSegment(min, max);
+//                    StdOut.println();
+//                    break;
+                } else {
+                    while (!stack.empty())
+                        stack.pop();
+                }
+                while (!slopes.empty())
+                    slopes.pop();
+            }
+            while (stack.size() > 1)
+                stack.pop();
+        }
+    }
 
 
     public static void main(String[] args) {
@@ -94,10 +121,9 @@ public class BruteCollinearPoints {
         // print and draw the line segments
         BruteCollinearPoints collinear = new BruteCollinearPoints(points);
         for (LineSegment segment : collinear.segments()) {
-            if (segment != null) {
-                StdOut.println(segment);
-                segment.draw();
-            }
+            StdOut.println(segment);
+            segment.draw();
+
         }
         StdDraw.show();
     }
