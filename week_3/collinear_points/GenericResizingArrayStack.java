@@ -17,6 +17,10 @@ public class GenericResizingArrayStack<Item> implements Iterable<Item> {
         return N == 0;
     }
 
+    public int size() {
+        return N;
+    }
+
     public void push(Item item) {
         if (N == s.length) resize(s.length * 2);
         s[N++] = item;
