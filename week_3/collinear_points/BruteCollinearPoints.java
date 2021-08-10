@@ -68,23 +68,22 @@ public class BruteCollinearPoints {
                         stack.push(points[k]);
                 }
                 if (stack.size() >= 4) {
-//                    StdOut.print("Elements are : ");
-//                    while (!stack.empty())
-//                        StdOut.print(stack.pop() + " ");
-//                    StdOut.print("Slope is: " + testSlope);
-                    max = stack.pop();
-                    min = max;
-                    while (!stack.empty()) {
-                        Point temp = stack.pop();
-                        if (max.compareTo(temp) < 0)
-                            max = temp;
-                        if (min.compareTo(temp) > 0)
-                            min = temp;
-                    }
-                    addSegment(new LineSegment(min, max));
-//                    mySegments[0] = new LineSegment(min, max);
-//                    StdOut.println();
-//                    break;
+                    StdOut.print("Elements are : ");
+                    while (!stack.empty())
+                        StdOut.print(stack.pop() + " ");
+                    StdOut.print("Slope is: " + testSlope);
+//                    max = stack.pop();
+//                    min = max;
+//                    while (!stack.empty()) {
+//                        Point temp = stack.pop();
+//                        if (max.compareTo(temp) < 0)
+//                            max = temp;
+//                        if (min.compareTo(temp) > 0)
+//                            min = temp;
+//                    }
+//                    addSegment(new LineSegment(min, max));
+                    StdOut.println();
+                    break;
                 } else {
                     while (!stack.empty())
                         stack.pop();
@@ -121,8 +120,10 @@ public class BruteCollinearPoints {
         // print and draw the line segments
         BruteCollinearPoints collinear = new BruteCollinearPoints(points);
         for (LineSegment segment : collinear.segments()) {
-            StdOut.println(segment);
-            segment.draw();
+            if (segment != null) {
+                StdOut.println(segment);
+                segment.draw();
+            }
 
         }
         StdDraw.show();
