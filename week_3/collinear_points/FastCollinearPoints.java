@@ -1,25 +1,23 @@
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.StdOut;
-
-import java.util.Stack;
-
 /*************************************************************************
  *  Compilation:  javac BruteCollinearPoints.java
  *  Execution:    java BruteCollinearPoints
  *  Dependencies: Point.java, LineSegment.java
  *
- *  Brute Force Algorithm meant to solve the Collinear Points problem.
+ *  Faster Sorted Algorithm meant to solve the Collinear Points problem.
  *  For use on Coursera, Algorithms Part I programming assignment.
  *
  * Author: Christopher Marisco
  *************************************************************************/
-public class BruteCollinearPoints {
+
+public class FastCollinearPoints {
 
     private LineSegment[] mySegments;
     private int segmentIndex = 0;
 
-    public BruteCollinearPoints(Point[] points) {
+    public FastCollinearPoints(Point[] points){
         if (points == null)
             throw new IllegalArgumentException("Null Array is an invalid argument");
         mySegments = new LineSegment[1];
@@ -48,49 +46,13 @@ public class BruteCollinearPoints {
         mySegments = copy;
     }
 
-    private void findSegment(Point[] points) {
-        Point max, min;
-        double tempSlope, testSlope = Double.NEGATIVE_INFINITY, innerSlope, epsilon = .0001;
-        Stack<Point> stack = new Stack<>();
-        for (int i = 0; i < points.length; i++) {
-            stack.push(points[i]);
-            for (int j = i + 1; j < points.length; j++) {
-                if (j == i) continue;
-                tempSlope = points[i].slopeTo(points[j]);
-                if (testSlope == tempSlope) break;
-                testSlope = tempSlope;
-                stack.push(points[j]);
-                for (int k = j + 1; k < points.length; k++) {
-                    if (k == i || k == j) continue;
-                    innerSlope = points[i].slopeTo(points[k]);
-                    if (Math.abs(testSlope - innerSlope) < epsilon)
-                        stack.push(points[k]);
-                }
-                if (stack.size() >= 4) {
-                    max = stack.pop();
-                    min = max;
-                    while (!stack.empty()) {
-                        Point temp = stack.pop();
-                        if (max.compareTo(temp) < 0)
-                            max = temp;
-                        if (min.compareTo(temp) > 0)
-                            min = temp;
-                    }
-                    addSegment(new LineSegment(min, max));
-                } else {
-                    while (!stack.empty())
-                        stack.pop();
-                }
+    private void findSegment(Point[] points){
 
-                testSlope = Double.NEGATIVE_INFINITY;
-            }
-            while (stack.size() > 1)
-                stack.pop();
-        }
     }
 
 
     public static void main(String[] args) {
+
         // read the n points from a file
         In in = new In(args[0]);
         int n = in.readInt();
@@ -111,11 +73,10 @@ public class BruteCollinearPoints {
         StdDraw.show();
 
         // print and draw the line segments
-        BruteCollinearPoints collinear = new BruteCollinearPoints(points);
+        FastCollinearPoints collinear = new FastCollinearPoints(points);
         for (LineSegment segment : collinear.segments()) {
             StdOut.println(segment);
             segment.draw();
-
         }
         StdDraw.show();
     }
