@@ -38,7 +38,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../week_2" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
@@ -64,28 +64,4 @@
     </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
-  <component name="WindowStateProjectService">
-    <state x="447" y="47" key="#com.intellij.ide.util.MemberChooser" timestamp="1617855776541">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="447" y="47" key="#com.intellij.ide.util.MemberChooser/0.0.1280.680@0.0.1280.680" timestamp="1617855776541" />
-    <state x="376" y="218" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1617647394954">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="376" y="218" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1280.680@0.0.1280.680" timestamp="1617647394954" />
-    <state x="422" y="96" key="FileChooserDialogImpl" timestamp="1620078343653">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="422" y="96" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1620078343653" />
-    <state x="474" y="169" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1619149279501" />
-    <state x="130" y="0" key="SettingsEditor" timestamp="1619149310646">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="122" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1617766376588" />
-    <state x="130" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1619149310646" />
-    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1617647524615">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1617647524615" />
-  </component>
 </project>
