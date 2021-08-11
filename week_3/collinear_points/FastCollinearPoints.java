@@ -1,6 +1,9 @@
 import edu.princeton.cs.algs4.In;
-import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.StdOut;
+
+import java.util.Arrays;
+import java.util.Comparator;
+
 /*************************************************************************
  *  Compilation:  javac BruteCollinearPoints.java
  *  Execution:    java BruteCollinearPoints
@@ -47,6 +50,23 @@ public class FastCollinearPoints {
     }
 
     private void findSegment(Point[] points){
+        double[] temp = new double[points.length];
+        Point origin = points[3];
+        StdOut.println("Origin: " + origin);
+        StdOut.println("unsorted points by origin: " + Arrays.toString(points));
+        for(int i = 0; i < temp.length; i++){
+            temp[i] = points[i].slopeTo(origin);
+//            temp[i] = origin.slopeTo(points[i]);
+        }
+        StdOut.println(Arrays.toString(temp));
+        Comparator<Point> c = origin.slopeOrder();
+        Arrays.sort(points, c);
+        StdOut.println("sorted points by origin: " + Arrays.toString(points));
+        for(int i = 0; i < temp.length; i++){
+            temp[i] = points[i].slopeTo(origin);
+//            temp[i] = origin.slopeTo(points[i]);
+        }
+        StdOut.println(Arrays.toString(temp));
 
     }
 
@@ -64,20 +84,20 @@ public class FastCollinearPoints {
         }
 
         // draw the points
-        StdDraw.enableDoubleBuffering();
-        StdDraw.setXscale(0, 32768);
-        StdDraw.setYscale(0, 32768);
-        for (Point p : points) {
-            p.draw();
-        }
-        StdDraw.show();
-
-        // print and draw the line segments
+//        StdDraw.enableDoubleBuffering();
+//        StdDraw.setXscale(0, 32768);
+//        StdDraw.setYscale(0, 32768);
+//        for (Point p : points) {
+//            p.draw();
+//        }
+//        StdDraw.show();
+//
+//        // print and draw the line segments
         FastCollinearPoints collinear = new FastCollinearPoints(points);
-        for (LineSegment segment : collinear.segments()) {
-            StdOut.println(segment);
-            segment.draw();
-        }
-        StdDraw.show();
+//        for (LineSegment segment : collinear.segments()) {
+//            StdOut.println(segment);
+//            segment.draw();
+//        }
+//        StdDraw.show();
     }
 }
