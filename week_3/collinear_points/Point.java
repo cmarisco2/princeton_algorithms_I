@@ -101,6 +101,7 @@ public class Point implements Comparable<Point> {
     private class BySlope implements Comparator<Point> {
         public int compare(Point v, Point w) {
             return (int) (Point.this.slopeTo(v) - Point.this.slopeTo(w));
+//            return (int) (v.slopeTo(Point.this) - w.slopeTo(Point.this));
         }
     }
 
