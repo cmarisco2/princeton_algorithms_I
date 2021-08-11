@@ -50,16 +50,18 @@ public class BruteCollinearPoints {
 
     private void findSegment(Point[] points) {
         Point max, min;
-        double testSlope, innerSlope, epsilon = .0001;
-        Stack<Double> slopes = new Stack<>();
+        double tempSlope, testSlope = Double.NEGATIVE_INFINITY, innerSlope, epsilon = .0001;
+//        Stack<Double> slopes = new Stack<>();
         Stack<Point> stack = new Stack<>();
         for (int i = 0; i < points.length; i++) {
             stack.push(points[i]);
             for (int j = i + 1; j < points.length; j++) {
                 if (j == i) continue;
-                testSlope = points[i].slopeTo(points[j]);
-                if (slopes.contains(testSlope)) break;
-                slopes.push(testSlope);
+//                testSlope = points[i].slopeTo(points[j]);
+                tempSlope = points[i].slopeTo(points[j]);
+                if (testSlope == tempSlope) break;
+                testSlope = tempSlope;
+//                slopes.push(testSlope);
                 stack.push(points[j]);
                 for (int k = j + 1; k < points.length; k++) {
                     if (k == i || k == j) continue;
@@ -82,8 +84,9 @@ public class BruteCollinearPoints {
                     while (!stack.empty())
                         stack.pop();
                 }
-                while (!slopes.empty())
-                    slopes.pop();
+//                while (!slopes.empty())
+//                    slopes.pop();
+                testSlope = Double.NEGATIVE_INFINITY;
             }
             while (stack.size() > 1)
                 stack.pop();
