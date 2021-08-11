@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="df1b1672-d96a-4da2-bf82-c32fc25da224" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/week_3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/week_3.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/collinear_points/FastCollinearPoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/collinear_points/FastCollinearPoints.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/collinear_points/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/collinear_points/Point.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
