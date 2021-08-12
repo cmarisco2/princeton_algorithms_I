@@ -68,12 +68,30 @@ public class FastCollinearPoints {
         }
         StdOut.println(Arrays.toString(temp));
         StdOut.println();
-        int instanceCount = 1;
-        for(int i = 0; i < temp.length - 1; i++){
-            if(temp[i] == temp[i + 1]) instanceCount++;
+//        int instanceCount = 1;
+//        for(int i = 0; i < temp.length - 1; i++){
+//            if(temp[i] == temp[i + 1]) instanceCount++;
+//        }
+//        StdOut.println("Duplicate Count Equals: " + instanceCount)
+        /*
+        Code for detecting duplicates and the indices they exist at
+         */
+        int a = 0; int b = 1;
+        while(temp[a] != temp[b]){
+            if(b == temp.length - 1) break;
+            a++;
+            b++;
         }
-        StdOut.println("Duplicate Count Equals: " + instanceCount);
-
+        while(temp[a] == temp[b]){
+            if(b == temp.length - 1) break;
+            b++;
+        }
+        int duplicates = b - a;
+        if(b != temp.length) b--;
+        StdOut.println("Duplicate Count Equals: " + duplicates + "\nBeginning at index: " + a + "\nEnding at index: " + b);
+        /*
+        End of code for counting duplicates and reporting on indices.
+         */
     }
 
 
