@@ -1,6 +1,7 @@
 .vscode/
 week_2/hw_zip/queues/.idea/
 week_2/hw_zip/queues/queues.iml
+week_3/.idea/
 week_3/collinear_points/BruteCollinearPoints$1.class
 week_3/collinear_points/BruteCollinearPoints$QueueIterator.class
 week_3/collinear_points/BruteCollinearPoints.class
@@ -9,5 +10,4 @@ week_3/collinear_points/LineSegment.class
 week_3/collinear_points/Point$1.class
 week_3/collinear_points/Point$BySlope.class
 week_3/collinear_points/Point.class
-week_3/.idea/workspace.xml
 week_3/out/
