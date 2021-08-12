@@ -53,20 +53,26 @@ public class FastCollinearPoints {
         double[] temp = new double[points.length];
         Point origin = points[3];
         StdOut.println("Origin: " + origin);
-        StdOut.println("unsorted points by origin: " + Arrays.toString(points));
+        StdOut.println();
+        StdOut.println("Unsorted points by origin: \n\n" + Arrays.toString(points));
         for(int i = 0; i < temp.length; i++){
             temp[i] = points[i].slopeTo(origin);
-//            temp[i] = origin.slopeTo(points[i]);
         }
         StdOut.println(Arrays.toString(temp));
         Comparator<Point> c = origin.slopeOrder();
         Arrays.sort(points, c);
-        StdOut.println("sorted points by origin: " + Arrays.toString(points));
+        StdOut.println();
+        StdOut.println("Sorted points by origin: \n\n" + Arrays.toString(points));
         for(int i = 0; i < temp.length; i++){
             temp[i] = points[i].slopeTo(origin);
-//            temp[i] = origin.slopeTo(points[i]);
         }
         StdOut.println(Arrays.toString(temp));
+        StdOut.println();
+        int instanceCount = 1;
+        for(int i = 0; i < temp.length - 1; i++){
+            if(temp[i] == temp[i + 1]) instanceCount++;
+        }
+        StdOut.println("Duplicate Count Equals: " + instanceCount);
 
     }
 
