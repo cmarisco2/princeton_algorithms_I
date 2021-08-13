@@ -49,17 +49,16 @@ public class BruteCollinearPoints {
     }
 
     private void findSegment(Point[] points) {
-//        Point max, min;
-        double testSlope, innerSlope, epsilon = .0001;
-        Stack<Double> slopes = new Stack<>();
+        Point max, min;
+        double tempSlope, testSlope = Double.NEGATIVE_INFINITY, innerSlope, epsilon = .0001;
         Stack<Point> stack = new Stack<>();
         for (int i = 0; i < points.length; i++) {
             stack.push(points[i]);
             for (int j = i + 1; j < points.length; j++) {
                 if (j == i) continue;
-                testSlope = points[i].slopeTo(points[j]);
-                if (slopes.contains(testSlope)) break;
-                slopes.push(testSlope);
+                tempSlope = points[i].slopeTo(points[j]);
+                if (testSlope == tempSlope) break;
+                testSlope = tempSlope;
                 stack.push(points[j]);
                 for (int k = j + 1; k < points.length; k++) {
                     if (k == i || k == j) continue;
@@ -68,18 +67,22 @@ public class BruteCollinearPoints {
                         stack.push(points[k]);
                 }
                 if (stack.size() >= 4) {
-                    StdOut.print("Elements are : ");
-                    while (!stack.empty())
-                        StdOut.print(stack.pop() + " ");
-                    StdOut.print("Slope is: " + testSlope);
-                    StdOut.println();
-                    break;
+                    max = stack.pop();
+                    min = max;
+                    while (!stack.empty()) {
+                        Point temp = stack.pop();
+                        if (max.compareTo(temp) < 0)
+                            max = temp;
+                        if (min.compareTo(temp) > 0)
+                            min = temp;
+                    }
+                    addSegment(new LineSegment(min, max));
                 } else {
                     while (!stack.empty())
                         stack.pop();
                 }
-                while (!slopes.empty())
-                    slopes.pop();
+
+                testSlope = Double.NEGATIVE_INFINITY;
             }
             while (stack.size() > 1)
                 stack.pop();
