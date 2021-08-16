@@ -49,7 +49,10 @@ public class FastCollinearPoints {
         mySegments = copy;
     }
 
-    private void findSegment(Point[] points){
+    private void findSegment(Point[] points, Point[] cpy){
+        StdOut.println("copy array:");
+        StdOut.println(Arrays.toString(cpy));
+
         double[] temp = new double[points.length];
         Point origin = points[3];
         StdOut.println("Origin: " + origin);
@@ -59,6 +62,9 @@ public class FastCollinearPoints {
             temp[i] = points[i].slopeTo(origin);
         }
         StdOut.println(Arrays.toString(temp));
+        /*
+        Code for sorting points array via comparator using slopeOrder() for a given Point.
+         */
         Comparator<Point> c = origin.slopeOrder();
         Arrays.sort(points, c);
         StdOut.println();
@@ -68,11 +74,7 @@ public class FastCollinearPoints {
         }
         StdOut.println(Arrays.toString(temp));
         StdOut.println();
-//        int instanceCount = 1;
-//        for(int i = 0; i < temp.length - 1; i++){
-//            if(temp[i] == temp[i + 1]) instanceCount++;
-//        }
-//        StdOut.println("Duplicate Count Equals: " + instanceCount)
+
         /*
         Code for detecting duplicates and the indices they exist at
          */
@@ -92,6 +94,11 @@ public class FastCollinearPoints {
         /*
         End of code for counting duplicates and reporting on indices.
          */
+    }
+
+    private void findSegment(Point[] points){
+        Point[] cpy = Arrays.copyOf(points, points.length);
+        findSegment(points, cpy);
     }
 
 
