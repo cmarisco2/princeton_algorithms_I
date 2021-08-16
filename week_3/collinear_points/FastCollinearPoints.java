@@ -50,50 +50,41 @@ public class FastCollinearPoints {
     }
 
     private void findSegment(Point[] points, Point[] cpy){
-        StdOut.println("copy array:");
-        StdOut.println(Arrays.toString(cpy));
-
-        double[] temp = new double[points.length];
-        Point origin = points[3];
-        StdOut.println("Origin: " + origin);
-        StdOut.println();
-        StdOut.println("Unsorted points by origin: \n\n" + Arrays.toString(points));
-        for(int i = 0; i < temp.length; i++){
-            temp[i] = points[i].slopeTo(origin);
+        Point origin;
+        Comparator<Point> slopeOrder;
+        StdOut.println("Point Array Copy: " + Arrays.toString(cpy));
+        for(int i = 0; i < points.length; i++){ //O(n) * internal
+            origin = points[i];
+            slopeOrder = origin.slopeOrder();
+            Arrays.sort(cpy, slopeOrder); //O(NlgN)
+            printPoints(cpy, origin);
         }
-        StdOut.println(Arrays.toString(temp));
-        /*
-        Code for sorting points array via comparator using slopeOrder() for a given Point.
-         */
-        Comparator<Point> c = origin.slopeOrder();
-        Arrays.sort(points, c);
-        StdOut.println();
-        StdOut.println("Sorted points by origin: \n\n" + Arrays.toString(points));
-        for(int i = 0; i < temp.length; i++){
-            temp[i] = points[i].slopeTo(origin);
-        }
-        StdOut.println(Arrays.toString(temp));
-        StdOut.println();
 
         /*
         Code for detecting duplicates and the indices they exist at
          */
-        int a = 0; int b = 1;
-        while(temp[a] != temp[b]){
-            if(b == temp.length - 1) break;
-            a++;
-            b++;
-        }
-        while(temp[a] == temp[b]){
-            if(b == temp.length - 1) break;
-            b++;
-        }
-        int duplicates = b - a;
-        if(b != temp.length) b--;
-        StdOut.println("Duplicate Count Equals: " + duplicates + "\nBeginning at index: " + a + "\nEnding at index: " + b);
+//        int a = 0; int b = 1;
+//        while(temp[a] != temp[b]){
+//            if(b == temp.length - 1) break;
+//            a++;
+//            b++;
+//        }
+//        while(temp[a] == temp[b]){
+//            if(b == temp.length - 1) break;
+//            b++;
+//        }
+//        int duplicates = b - a;
+//        if(b != temp.length) b--;
+//        StdOut.println("Duplicate Count Equals: " + duplicates + "\nBeginning at index: " + a + "\nEnding at index: " + b);
         /*
         End of code for counting duplicates and reporting on indices.
          */
+    }
+    private void printPoints(Point[] points, Point origin){
+        StdOut.println("Origin: " + origin);
+        StdOut.println();
+        StdOut.println("Sorted points: \n" + Arrays.toString(points));
+        StdOut.println();
     }
 
     private void findSegment(Point[] points){
