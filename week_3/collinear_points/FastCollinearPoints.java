@@ -52,17 +52,34 @@ public class FastCollinearPoints {
     private void findSegment(Point[] points, Point[] cpy){
         Point origin;
         Comparator<Point> slopeOrder;
-        StdOut.println("Point Array Copy: " + Arrays.toString(cpy));
+        int a , b , duplicates;
+        StdOut.println("Point Array Copy: " + Arrays.toString(cpy) + "\n");
         for(int i = 0; i < points.length; i++){ //O(n) * internal
+            a = 0;
+            b = 1;
             origin = points[i];
             slopeOrder = origin.slopeOrder();
             Arrays.sort(cpy, slopeOrder); //O(NlgN)
             printPoints(cpy, origin);
+            while(cpy[a].slopeTo(origin) != cpy[b].slopeTo(origin)){
+                if(b == cpy.length - 1) break;
+                a++;
+                b++;
+            }
+            while(cpy[a].slopeTo(origin) == cpy[b].slopeTo(origin)){
+                if(b == cpy.length - 1) break;
+                b++;
+            }
+            duplicates = b - a;
+            if (b != cpy.length) b--;
+            StdOut.println("Duplicates: " + duplicates + "\nBeginning at index: " + a + "\nEnding at index: " + b);
+            StdOut.println();
         }
 
         /*
         Code for detecting duplicates and the indices they exist at
          */
+        //Anywhere a value is notated from the array (ex: temp[a]) need to use an evaluation of the slopeTo function in order to convert this 'a' and 'b' generic solution into a usable solution.
 //        int a = 0; int b = 1;
 //        while(temp[a] != temp[b]){
 //            if(b == temp.length - 1) break;
