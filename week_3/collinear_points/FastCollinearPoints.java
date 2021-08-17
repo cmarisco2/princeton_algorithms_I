@@ -50,11 +50,13 @@ public class FastCollinearPoints {
     }
 
     private void findSegment(Point[] points){
+        Arrays.sort(points);
         double[] temp = new double[points.length];
-        Point origin = points[3];
+        Point origin = points[0];
         StdOut.println("Origin: " + origin);
         StdOut.println();
-        StdOut.println("Unsorted points by origin: \n\n" + Arrays.toString(points));
+        StdOut.println("Sorted points by natural order: \n\n" + Arrays.toString(points));
+//        StdOut.println("Unsorted points by origin: \n\n" + Arrays.toString(points));
         for(int i = 0; i < temp.length; i++){
             temp[i] = points[i].slopeTo(origin);
         }
@@ -62,7 +64,7 @@ public class FastCollinearPoints {
         Comparator<Point> c = origin.slopeOrder();
         Arrays.sort(points, c);
         StdOut.println();
-        StdOut.println("Sorted points by origin: \n\n" + Arrays.toString(points));
+        StdOut.println("Sorted points by origin(Slope Order): \n\n" + Arrays.toString(points));
         for(int i = 0; i < temp.length; i++){
             temp[i] = points[i].slopeTo(origin);
         }
@@ -87,7 +89,7 @@ public class FastCollinearPoints {
             b++;
         }
         int duplicates = b - a;
-        if(b != temp.length) b--;
+        if(b != temp.length -1) b--;
         StdOut.println("Duplicate Count Equals: " + duplicates + "\nBeginning at index: " + a + "\nEnding at index: " + b);
         /*
         End of code for counting duplicates and reporting on indices.
