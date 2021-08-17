@@ -27,7 +27,7 @@ public class FastCollinearPoints {
         for (int i = 0; i < points.length - 1; i++)
             if (points[i].compareTo(points[i + 1]) == 0)
                 throw new IllegalArgumentException("Cannot Use Repeated Points");
-        findSegment(points);
+            findSegment(points);
     }
 
     public int numberOfSegments() {
@@ -52,15 +52,21 @@ public class FastCollinearPoints {
     private void findSegment(Point[] points, Point[] cpy){
         Point origin;
         Comparator<Point> slopeOrder;
-        int a , b , duplicates;
+        int a , b , duplicateSlopes;
         StdOut.println("Point Array Copy: " + Arrays.toString(cpy) + "\n");
-        for(int i = 0; i < points.length; i++){ //O(n) * internal
+        for(int i = 0; i < points.length; i++){ //O(n) * internal complexity max.
             a = 0;
             b = 1;
             origin = points[i];
             slopeOrder = origin.slopeOrder();
+            /*
+                Sort the cpy array for each element, i, in points array
+             */
             Arrays.sort(cpy, slopeOrder); //O(NlgN)
             printPoints(cpy, origin);
+            /*
+                Code for detecting duplicates and the indices they exist at
+             */
             while(cpy[a].slopeTo(origin) != cpy[b].slopeTo(origin)){
                 if(b == cpy.length - 1) break;
                 a++;
@@ -70,9 +76,9 @@ public class FastCollinearPoints {
                 if(b == cpy.length - 1) break;
                 b++;
             }
-            duplicates = b - a;
-            if (b != cpy.length) b--;
-            StdOut.println("Duplicates: " + duplicates + "\nBeginning at index: " + a + "\nEnding at index: " + b);
+            duplicateSlopes = b - a;
+            if (b != cpy.length - 1) b--;
+            StdOut.println("Duplicates: " + duplicateSlopes + "\nBeginning at index: " + a + "\nEnding at index: " + b);
             StdOut.println();
         }
 
@@ -105,6 +111,7 @@ public class FastCollinearPoints {
     }
 
     private void findSegment(Point[] points){
+        Arrays.sort(points);
         Point[] cpy = Arrays.copyOf(points, points.length);
         findSegment(points, cpy);
     }
