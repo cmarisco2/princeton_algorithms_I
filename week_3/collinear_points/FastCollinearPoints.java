@@ -1,4 +1,5 @@
 import edu.princeton.cs.algs4.In;
+import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.StdOut;
 
 import java.util.Arrays;
@@ -89,11 +90,23 @@ public class FastCollinearPoints {
             b++;
         }
         int duplicates = b - a;
-        if(b != temp.length -1) b--;
+        if(b != temp.length - 1) b--;
         StdOut.println("Duplicate Count Equals: " + duplicates + "\nBeginning at index: " + a + "\nEnding at index: " + b);
         /*
         End of code for counting duplicates and reporting on indices.
          */
+
+        /*
+        Begin Code for Creating LineSegment
+         */
+        Point min = origin;
+        while(a <= b){
+            if(min.compareTo(points[a]) > 0)
+                min = points[a];
+            a++;
+        }
+        if(min.compareTo(origin) == 0)
+            addSegment(new LineSegment(min, points[b]));
     }
 
 
@@ -110,20 +123,20 @@ public class FastCollinearPoints {
         }
 
         // draw the points
-//        StdDraw.enableDoubleBuffering();
-//        StdDraw.setXscale(0, 32768);
-//        StdDraw.setYscale(0, 32768);
-//        for (Point p : points) {
-//            p.draw();
-//        }
-//        StdDraw.show();
+        StdDraw.enableDoubleBuffering();
+        StdDraw.setXscale(0, 32768);
+        StdDraw.setYscale(0, 32768);
+        for (Point p : points) {
+            p.draw();
+        }
+        StdDraw.show();
 //
 //        // print and draw the line segments
         FastCollinearPoints collinear = new FastCollinearPoints(points);
-//        for (LineSegment segment : collinear.segments()) {
-//            StdOut.println(segment);
-//            segment.draw();
-//        }
-//        StdDraw.show();
+        for (LineSegment segment : collinear.segments()) {
+            StdOut.println(segment);
+            segment.draw();
+        }
+        StdDraw.show();
     }
 }
