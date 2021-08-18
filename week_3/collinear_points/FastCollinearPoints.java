@@ -51,27 +51,28 @@ public class FastCollinearPoints {
     }
 
     private void findSegment(Point[] points){
-        Arrays.sort(points);
         double[] temp = new double[points.length];
+        for(int j = 0; j < points.length; j++) {
+            Arrays.sort(points);
 //        Point origin = points[0];
-        Point origin = points[2];
-        StdOut.println("Origin: " + origin);
-        StdOut.println();
-        StdOut.println("Sorted points by natural order: \n\n" + Arrays.toString(points));
+            Point origin = points[j];
+            StdOut.println("Origin: " + origin);
+            StdOut.println();
+            StdOut.println("Sorted points by natural order: \n\n" + Arrays.toString(points));
 //        StdOut.println("Unsorted points by origin: \n\n" + Arrays.toString(points));
-        for(int i = 0; i < temp.length; i++){
-            temp[i] = points[i].slopeTo(origin);
-        }
-        StdOut.println(Arrays.toString(temp));
-        Comparator<Point> c = origin.slopeOrder();
-        Arrays.sort(points, c);
-        StdOut.println();
-        StdOut.println("Sorted points by origin(Slope Order): \n\n" + Arrays.toString(points));
-        for(int i = 0; i < temp.length; i++){
-            temp[i] = points[i].slopeTo(origin);
-        }
-        StdOut.println(Arrays.toString(temp));
-        StdOut.println();
+            for (int i = 0; i < temp.length; i++) {
+                temp[i] = points[i].slopeTo(origin);
+            }
+            StdOut.println(Arrays.toString(temp));
+            Comparator<Point> c = origin.slopeOrder();
+            Arrays.sort(points, c);
+            StdOut.println();
+            StdOut.println("Sorted points by origin(Slope Order): \n\n" + Arrays.toString(points));
+            for (int i = 0; i < temp.length; i++) {
+                temp[i] = points[i].slopeTo(origin);
+            }
+            StdOut.println(Arrays.toString(temp));
+            StdOut.println();
 //        int instanceCount = 1;
 //        for(int i = 0; i < temp.length - 1; i++){
 //            if(temp[i] == temp[i + 1]) instanceCount++;
@@ -80,19 +81,20 @@ public class FastCollinearPoints {
         /*
         Code for detecting duplicates and the indices they exist at
          */
-        int a = 0; int b = 1;
-        while(temp[a] != temp[b]){
-            if(b == temp.length - 1) break;
-            a++;
-            b++;
-        }
-        while(temp[a] == temp[b] && b < temp.length){
+            int a = 0;
+            int b = 1;
+            while (temp[a] != temp[b]) {
+                if (b == temp.length - 1) break;
+                a++;
+                b++;
+            }
+            while (b < temp.length && temp[a] == temp[b]) {
 //            if(b == temp.length - 1) break;
-            b++;
-        }
-        int duplicates = b - a;
-        b--;
-        StdOut.println("Duplicate Count Equals: " + duplicates + "\nBeginning at index: " + a + "\nEnding at index: " + b);
+                b++;
+            }
+            int duplicates = b - a;
+            b--;
+            StdOut.println("Duplicate Count Equals: " + duplicates + "\nBeginning at index: " + a + "\nEnding at index: " + b);
         /*
         End of code for counting duplicates and reporting on indices.
          */
@@ -100,17 +102,17 @@ public class FastCollinearPoints {
         /*
         Begin Code for Creating LineSegment
          */
-        if(duplicates >= 3){
-           Point min = origin;
-            while(a <= b){
-                if(min.compareTo(points[a]) > 0)
-                    min = points[a];
-                a++;
+            if (duplicates >= 3) {
+                Point min = origin;
+                while (a <= b) {
+                    if (min.compareTo(points[a]) > 0)
+                        min = points[a];
+                    a++;
+                }
+                if (min.compareTo(origin) == 0)
+                    addSegment(new LineSegment(min, points[b]));
             }
-            if(min.compareTo(origin) == 0)
-                addSegment(new LineSegment(min, points[b]));
         }
-
 
     }
 
