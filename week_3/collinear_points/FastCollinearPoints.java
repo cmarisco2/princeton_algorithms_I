@@ -51,42 +51,31 @@ public class FastCollinearPoints {
     }
 
     private void findSegment(Point[] points){
-        double[] temp = new double[points.length];
         for(int j = 0; j < points.length; j++) {
             Arrays.sort(points);
             Point origin = points[j];
-            StdOut.println("Origin: " + origin);
-            StdOut.println();
-            StdOut.println("Sorted points by natural order: \n\n" + Arrays.toString(points));
-            for (int i = 0; i < temp.length; i++) {
-                temp[i] = points[i].slopeTo(origin);
-            }
-            StdOut.println(Arrays.toString(temp));
+//            printPoints(points, origin, "natural");
+
+
             Comparator<Point> c = origin.slopeOrder();
             Arrays.sort(points, c);
-            StdOut.println();
-            StdOut.println("Sorted points by origin(Slope Order): \n\n" + Arrays.toString(points));
-            for (int i = 0; i < temp.length; i++) {
-                temp[i] = points[i].slopeTo(origin);
-            }
-            StdOut.println(Arrays.toString(temp));
-            StdOut.println();
+//            printPoints(points, origin, "slope");
         /*
         Code for detecting duplicates and the indices they exist at
          */
             int a = 0;
             int b = 1;
-            while (temp[a] != temp[b]) {
-                if (b == temp.length - 1) break;
+            while(points[a].slopeTo(origin) != points[b].slopeTo(origin)){
+                if(b == points.length - 1) break;
                 a++;
                 b++;
             }
-            while (b < temp.length && temp[a] == temp[b]) {
+            while(b < points.length && points[a].slopeTo(origin) == points[b].slopeTo(origin) ){
                 b++;
             }
             int duplicates = b - a;
             b--;
-            StdOut.println("Duplicate Count Equals: " + duplicates + "\nBeginning at index: " + a + "\nEnding at index: " + b);
+//            StdOut.println("Duplicate Count Equals: " + duplicates + "\nBeginning at index: " + a + "\nEnding at index: " + b +"\n");
         /*
         Begin Code for Creating LineSegment
          */
@@ -103,7 +92,17 @@ public class FastCollinearPoints {
         }
 
     }
+    private void printPoints(Point[] points, Point origin, String orderType){
+        StdOut.println("Origin: " + origin);
+        StdOut.println();
+        StdOut.println("Sorted points (" + orderType + " order): \n\n" + Arrays.toString(points));
+        StdOut.println();
+    }
 
+//    private void findSegment(Point[] points){
+//        Point[] cpy = Arrays.copyOf(points, points.length);
+//        findSegment(points, cpy);
+//    }
 
     public static void main(String[] args) {
 
