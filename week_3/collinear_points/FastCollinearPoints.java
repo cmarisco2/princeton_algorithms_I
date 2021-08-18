@@ -53,7 +53,8 @@ public class FastCollinearPoints {
     private void findSegment(Point[] points){
         Arrays.sort(points);
         double[] temp = new double[points.length];
-        Point origin = points[0];
+//        Point origin = points[0];
+        Point origin = points[2];
         StdOut.println("Origin: " + origin);
         StdOut.println();
         StdOut.println("Sorted points by natural order: \n\n" + Arrays.toString(points));
@@ -85,12 +86,12 @@ public class FastCollinearPoints {
             a++;
             b++;
         }
-        while(temp[a] == temp[b]){
-            if(b == temp.length - 1) break;
+        while(temp[a] == temp[b] && b < temp.length){
+//            if(b == temp.length - 1) break;
             b++;
         }
         int duplicates = b - a;
-        if(b != temp.length - 1) b--;
+        b--;
         StdOut.println("Duplicate Count Equals: " + duplicates + "\nBeginning at index: " + a + "\nEnding at index: " + b);
         /*
         End of code for counting duplicates and reporting on indices.
@@ -99,14 +100,18 @@ public class FastCollinearPoints {
         /*
         Begin Code for Creating LineSegment
          */
-        Point min = origin;
-        while(a <= b){
-            if(min.compareTo(points[a]) > 0)
-                min = points[a];
-            a++;
+        if(duplicates >= 3){
+           Point min = origin;
+            while(a <= b){
+                if(min.compareTo(points[a]) > 0)
+                    min = points[a];
+                a++;
+            }
+            if(min.compareTo(origin) == 0)
+                addSegment(new LineSegment(min, points[b]));
         }
-        if(min.compareTo(origin) == 0)
-            addSegment(new LineSegment(min, points[b]));
+
+
     }
 
 
@@ -134,8 +139,10 @@ public class FastCollinearPoints {
 //        // print and draw the line segments
         FastCollinearPoints collinear = new FastCollinearPoints(points);
         for (LineSegment segment : collinear.segments()) {
-            StdOut.println(segment);
-            segment.draw();
+            if(segment != null){
+                StdOut.println(segment);
+                segment.draw();
+            }
         }
         StdDraw.show();
     }
