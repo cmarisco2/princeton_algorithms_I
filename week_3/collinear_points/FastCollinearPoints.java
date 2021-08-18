@@ -54,12 +54,10 @@ public class FastCollinearPoints {
         double[] temp = new double[points.length];
         for(int j = 0; j < points.length; j++) {
             Arrays.sort(points);
-//        Point origin = points[0];
             Point origin = points[j];
             StdOut.println("Origin: " + origin);
             StdOut.println();
             StdOut.println("Sorted points by natural order: \n\n" + Arrays.toString(points));
-//        StdOut.println("Unsorted points by origin: \n\n" + Arrays.toString(points));
             for (int i = 0; i < temp.length; i++) {
                 temp[i] = points[i].slopeTo(origin);
             }
@@ -73,11 +71,6 @@ public class FastCollinearPoints {
             }
             StdOut.println(Arrays.toString(temp));
             StdOut.println();
-//        int instanceCount = 1;
-//        for(int i = 0; i < temp.length - 1; i++){
-//            if(temp[i] == temp[i + 1]) instanceCount++;
-//        }
-//        StdOut.println("Duplicate Count Equals: " + instanceCount)
         /*
         Code for detecting duplicates and the indices they exist at
          */
@@ -89,16 +82,11 @@ public class FastCollinearPoints {
                 b++;
             }
             while (b < temp.length && temp[a] == temp[b]) {
-//            if(b == temp.length - 1) break;
                 b++;
             }
             int duplicates = b - a;
             b--;
             StdOut.println("Duplicate Count Equals: " + duplicates + "\nBeginning at index: " + a + "\nEnding at index: " + b);
-        /*
-        End of code for counting duplicates and reporting on indices.
-         */
-
         /*
         Begin Code for Creating LineSegment
          */
@@ -137,8 +125,7 @@ public class FastCollinearPoints {
             p.draw();
         }
         StdDraw.show();
-//
-//        // print and draw the line segments
+        // print and draw the line segments
         FastCollinearPoints collinear = new FastCollinearPoints(points);
         for (LineSegment segment : collinear.segments()) {
             if(segment != null){
