@@ -82,26 +82,7 @@ public class FastCollinearPoints {
             StdOut.println();
         }
 
-        /*
-        Code for detecting duplicates and the indices they exist at
-         */
-        //Anywhere a value is notated from the array (ex: temp[a]) need to use an evaluation of the slopeTo function in order to convert this 'a' and 'b' generic solution into a usable solution.
-//        int a = 0; int b = 1;
-//        while(temp[a] != temp[b]){
-//            if(b == temp.length - 1) break;
-//            a++;
-//            b++;
-//        }
-//        while(temp[a] == temp[b]){
-//            if(b == temp.length - 1) break;
-//            b++;
-//        }
-//        int duplicates = b - a;
-//        if(b != temp.length) b--;
-//        StdOut.println("Duplicate Count Equals: " + duplicates + "\nBeginning at index: " + a + "\nEnding at index: " + b);
-        /*
-        End of code for counting duplicates and reporting on indices.
-         */
+
     }
     private void printPoints(Point[] points, Point origin){
         StdOut.println("Origin: " + origin);
