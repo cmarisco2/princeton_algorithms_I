@@ -2,7 +2,8 @@ import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.StdOut;
 
-import java.util.Stack;
+//import java.util.Stack;
+import edu.princeton.cs.algs4.Stack;
 
 /*************************************************************************
  *  Compilation:  javac BruteCollinearPoints.java
@@ -30,11 +31,16 @@ public class BruteCollinearPoints {
     }
 
     public int numberOfSegments() {
-        return mySegments.length;
+        return segmentIndex;
     }
 
     public LineSegment[] segments() {
-        return mySegments;
+        LineSegment[] cpy = new LineSegment[segmentIndex];
+        for (int i = 0; i < segmentIndex; i++) {
+            if(mySegments[i] != null)
+                cpy[i] = mySegments[i];
+        }
+        return cpy;
     }
 
     private void addSegment(LineSegment line) {
@@ -69,7 +75,7 @@ public class BruteCollinearPoints {
                 if (stack.size() >= 4) {
                     max = stack.pop();
                     min = max;
-                    while (!stack.empty()) {
+                    while (!stack.isEmpty()) {
                         Point temp = stack.pop();
                         if (max.compareTo(temp) < 0)
                             max = temp;
@@ -78,7 +84,7 @@ public class BruteCollinearPoints {
                     }
                     addSegment(new LineSegment(min, max));
                 } else {
-                    while (!stack.empty())
+                    while (!stack.isEmpty())
                         stack.pop();
                 }
 
